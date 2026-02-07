@@ -35,11 +35,10 @@ from django.views.generic import ListView
 from rest_framework.generics import CreateAPIView
 from rest_framework.serializers import Serializer
 
-from plugin_example.xlsx_parser_lib.xlsx_parser import XlsxParser
-
+from import_json.parser.json_parser import XlsxParser
 
 class ProjectListView(ListView):
-    model = Project
+    model = Projectß
     queryset = Project.objects.all()
     template_name = 'upload.html'
     context_object_name = 'projects'
