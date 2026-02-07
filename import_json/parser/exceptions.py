@@ -28,15 +28,10 @@
 # if any, to sign a "copyright disclaimer" for the program, if necessary.
 # For more information on this, and how to apply and follow the GNU AGPL, see
 # <http://www.gnu.org/licenses/>.
-from setuptools import find_packages, setup
+from rest_framework import status
+from rest_framework.exceptions import APIException
 
-setup(
-    name='import-json',
-    version='0.0.1',
-    description='Import test cases from json',
-    install_requires=['openpyxl==3.1.1'],
-    packages=find_packages(),
-    include_package_data=True,
-    zip_safe=False,
-    entry_points={'testy': ['import-json=import_jsonß']},
-)
+
+class InvalidXlsx(APIException):
+    status_code = status.HTTP_400_BAD_REQUEST
+    default_detail = 'Invalid XLSX file'

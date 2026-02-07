@@ -28,15 +28,19 @@
 # if any, to sign a "copyright disclaimer" for the program, if necessary.
 # For more information on this, and how to apply and follow the GNU AGPL, see
 # <http://www.gnu.org/licenses/>.
-from setuptools import find_packages, setup
+from testy.plugins.hooks import TestyPluginConfig, hookimpl
 
-setup(
-    name='import-json',
-    version='0.0.1',
-    description='Import test cases from json',
-    install_requires=['openpyxl==3.1.1'],
-    packages=find_packages(),
-    include_package_data=True,
-    zip_safe=False,
-    entry_points={'testy': ['import-json=import_jsonß']},
-)
+
+class ExamplePluginConfig(TestyPluginConfig):
+    package_name = 'import_json'
+    verbose_name = 'Import json'
+    description = 'Import test cases from json'
+    version = '0.0.1'
+    plugin_base_url = 'import-json'
+    index_reverse_name = 'upload-file'
+    urls_module = 'import_json.urls'
+
+
+@hookimpl
+def config():
+    return ExamplePluginConfig
